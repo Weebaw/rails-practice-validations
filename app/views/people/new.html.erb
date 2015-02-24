@@ -3,6 +3,16 @@
 </div>
 
 <%= form_for @person, html: {class: "form-horizontal"} do |f| %>
+      <% if @person.errors.any? %>
+      <b><%= pluralize(@person.errors.count, "error") %></b>
+      <b><%= "prohibited this person from being saved" %></b>
+      <% @person.errors.full_messages.each do |message| %>
+        <b><%= message %></b>
+      <% end %>
+      <% end %>
+<p> </p>
+
+
   <div class="form-group">
     <%= f.label :first_name, class: "control-label col-sm-2" %>
     <div class="col-sm-4">
@@ -24,6 +34,7 @@
   <div class="form-group">
     <div class="col-sm-4 col-sm-offset-2">
       <%= f.submit class: "btn btn-primary" %>
+
       <%= link_to "cancel", people_path, class: "btn btn-default" %>
     </div>
   </div>
